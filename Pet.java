@@ -14,23 +14,22 @@ public class Pet {
     private static ArrayList<Pet> pets = new ArrayList<>();
 
     // Construtor com todos os atributos tipados
-    public Pet(int id, String nome, String sexo, String tipo) {
-        this.id = id;
+    public Pet(String nome, String sexo, String tipo) {
         this.nome = nome;
         this.sexo = sexo;
         this.tipo = tipo;
     }
-    
+
     // Construtor para desserializar a partir de uma linha do arquivo
     public Pet(String linha) {
         this.deserializar(linha);
-     }
+    }
 
     // Método que adiciona um Pet a lista de pets
     public static void add(Pet pet) {
         pets.add(pet);
     }
-    
+
     // Método que retorna o identificador único do pet
     public int getId() {
         return this.id;
@@ -42,8 +41,25 @@ public class Pet {
             if (pet.getId() == id)
                 return pet;
         return null;
-    }   
+    }
 
+    public static Pet getByNome(String nome) {
+        for (Pet pet : pets) {
+            if (pet.getNome().equalsIgnoreCase(nome)) {
+                return pet;
+            }
+        }
+        return null;
+    }
+
+    public static Pet getByTipo (String tipo) {
+        for (Pet pet : pets) {
+            if (pet.getTipo().equalsIgnoreCase(tipo)) {
+                return pet;
+            }
+        }
+        return null;
+    }
     // Método que exibe os dados de todos os pets
     public static void exibirDados() {
         for (Pet pet : Pet.pets)
@@ -87,23 +103,21 @@ public class Pet {
 
     // Método que retorna o cabeçalho do arquivo
     public static String cabecalho() {
-        return
-            "id" + separador +
-            "nome" + separador +
-            "sexo" + separador +
-            "tipo";
+        return "id" + separador +
+                "nome" + separador +
+                "sexo" + separador +
+                "tipo";
     }
 
     // Método que serializa o objeto em uma linha de texto
     public String serializar() {
-        return
-            System.lineSeparator() +
-            id + separador +
-            nome + separador +
-            sexo + separador +
-            tipo;
+        return System.lineSeparator() +
+                id + separador +
+                nome + separador +
+                sexo + separador +
+                tipo;
     }
-    
+
     // Método que deserializa uma linha de texto em um objeto
     public void deserializar(String linha) {
         String[] campos = linha.split(separador);
@@ -118,4 +132,17 @@ public class Pet {
     public String toString() {
         return "Pet [id=" + id + ", nome=" + nome + ", sexo=" + sexo + ", tipo=" + tipo + "]";
     }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
 }
