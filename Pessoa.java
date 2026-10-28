@@ -14,11 +14,9 @@ public class Pessoa {
     private static ArrayList<Pessoa> pessoas = new ArrayList<>();
 
     // Construtor com todos os atributos tipados
-    public Pessoa(int id, String nome, String sexo, Pet pet) {
-        this.id = id;
+    public Pessoa(String nome, String sexo) {
         this.nome = nome;
         this.sexo = sexo;
-        this.pet = pet;
     }
 
     // Construtor para desserializar a partir de uma linha do arquivo
@@ -35,6 +33,15 @@ public class Pessoa {
     public static void exibirDados() {
         for (Pessoa pessoa : Pessoa.pessoas)
             System.out.println(pessoa);
+    }
+
+    public static Pessoa getByNome (String nome) {
+        for (Pessoa pessoa : pessoas) {
+            if (pessoa.getNome().equalsIgnoreCase(nome)){
+                return pessoa;
+            }
+        }
+        return null;
     }
 
     // Método para carregar os dados das pessoas a partir de um arquivo
@@ -104,6 +111,14 @@ public class Pessoa {
     @Override
     public String toString() {
         return "Pessoa [id=" + id + ", nome=" + nome + ", sexo=" + sexo + ", pet=" + (pet == null ? "null" : pet) + "]";
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getSexo() {
+        return sexo;
     }
 
 }
